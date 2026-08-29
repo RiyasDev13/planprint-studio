@@ -93,7 +93,7 @@ export function chunkWeeks(cells: DayCell[]): DayCell[][] {
 }
 
 export function formatMonthLabel(year: number, month: number): string {
-  return `${MONTH_NAMES[month]} ${year}`;
+  return `${MONTH_NAMES[month] ?? ""} ${year}`;
 }
 
 export function yearRange(): number[] {
