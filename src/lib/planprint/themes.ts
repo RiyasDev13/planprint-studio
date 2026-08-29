@@ -63,7 +63,7 @@ export const THEMES: SheetTheme[] = [
     name: "Indigo",
     bg: "#f3f4fa",
     ink: "#1e2340",
-    muted: "#64699p".replace("p", "0"),
+    muted: "#646990",
     accent: "#3f4a9b",
     accentInk: "#f3f4fa",
     grid: "#dadced",
