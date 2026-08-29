@@ -24,7 +24,7 @@ export function isLeapYear(year: number): boolean {
 
 export function daysInMonth(year: number, month: number): number {
   if (month === 1) return isLeapYear(year) ? 29 : 28;
-  return [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month];
+  return [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month] ?? 30;
 }
 
 /** Column order of weekdays (0=Sun..6=Sat) for the given week start. */
