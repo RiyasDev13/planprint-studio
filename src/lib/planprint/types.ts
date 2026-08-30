@@ -16,8 +16,8 @@ export interface CalendarEvent {
   /** ISO date, YYYY-MM-DD */
   date: string;
   title: string;
-  description?: string;
-  time?: string;
+  description?: string | undefined;
+  time?: string | undefined;
   category: EventCategory;
 }
 

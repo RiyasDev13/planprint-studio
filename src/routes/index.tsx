@@ -1,24 +1,40 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Header } from "@/components/planprint/Header";
+import { Hero } from "@/components/planprint/Hero";
+import { Features } from "@/components/planprint/Features";
+import { HowItWorks } from "@/components/planprint/HowItWorks";
+import { Footer } from "@/components/planprint/Footer";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "PlanPrint — Printable Calendar & Planner Generator" },
+      {
+        name: "description",
+        content:
+          "Create a custom printable calendar: choose a month, theme and font, add events and notes, then print or download as PDF or PNG on A4.",
+      },
+      { property: "og:title", content: "PlanPrint — Printable Calendar Generator" },
+      {
+        property: "og:description",
+        content:
+          "Customize your calendar, add important events, and print it instantly — every sheet true to A4.",
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-paper text-foreground">
+      <Header />
+      <main>
+        <Hero />
+        <Features />
+        <HowItWorks />
+      </main>
+      <Footer />
     </div>
   );
 }
