@@ -42,6 +42,12 @@ function EditorPage() {
   const [modalDate, setModalDate] = useState(todayISO());
   const [busy, setBusy] = useState<string | null>(null);
 
+  const { hydrated, update } = store;
+  // Apply a template chosen on /templates once local state has hydrated.
+  useEffect(() => {
+    if (hydrated && template) update("templateId", template);
+  }, [hydrated, template, update]);
+
   const filename = slugify(
     `${store.state.title || "calendar"}-${store.state.year}-${store.state.month + 1}`,
   );
