@@ -140,9 +140,10 @@ export const CalendarPreview = forwardRef<HTMLDivElement, Props>(function Calend
                 cellStyle.background = `${theme.accent}0f`;
               }
               if (isToday) {
-                cellStyle.background = theme.ink;
-                cellStyle.color = theme.bg;
-                cellStyle.borderColor = theme.ink;
+                // Light tint + a defined rule: readable on screen, cheap on ink.
+                cellStyle.background = `${theme.accent}14`;
+                cellStyle.borderColor = theme.accent;
+                cellStyle.boxShadow = `inset 0 0 0 1px ${theme.accent}`;
               }
 
               return (
@@ -178,10 +179,8 @@ export const CalendarPreview = forwardRef<HTMLDivElement, Props>(function Calend
                         key={e.id}
                         className="truncate rounded px-1.5 py-0.5 text-[10px] leading-tight"
                         style={{
-                          background: isToday
-                            ? `${theme.bg}26`
-                            : `${eventColor(e)}1f`,
-                          color: isToday ? theme.bg : eventColor(e),
+                          background: `${eventColor(e)}1f`,
+                          color: eventColor(e),
                         }}
                         title={e.title}
                       >

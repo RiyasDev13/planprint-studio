@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Header } from "@/components/planprint/Header";
 import { Footer } from "@/components/planprint/Footer";
 import { CalendarPreview } from "@/components/planprint/CalendarPreview";
@@ -11,6 +11,10 @@ import { downloadPDF, downloadPNG, printSheet, slugify } from "@/lib/planprint/e
 import { todayISO } from "@/lib/planprint/calendar";
 
 export const Route = createFileRoute("/editor")({
+  validateSearch: (search: Record<string, unknown>): { template?: string } => {
+    const t = search["template"];
+    return typeof t === "string" ? { template: t } : {};
+  },
   head: () => ({
     meta: [
       { title: "Calendar Editor — PlanPrint" },
@@ -32,10 +36,17 @@ export const Route = createFileRoute("/editor")({
 
 function EditorPage() {
   const store = usePlanPrint();
+  const { template } = Route.useSearch();
   const sheetRef = useRef<HTMLDivElement>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalDate, setModalDate] = useState(todayISO());
   const [busy, setBusy] = useState<string | null>(null);
+
+  const { hydrated, update } = store;
+  // Apply a template chosen on /templates once local state has hydrated.
+  useEffect(() => {
+    if (hydrated && template) update("templateId", template);
+  }, [hydrated, template, update]);
 
   const filename = slugify(
     `${store.state.title || "calendar"}-${store.state.year}-${store.state.month + 1}`,
