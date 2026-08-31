@@ -36,6 +36,7 @@ export const Route = createFileRoute("/editor")({
 
 function EditorPage() {
   const store = usePlanPrint();
+  const { template } = Route.useSearch();
   const sheetRef = useRef<HTMLDivElement>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalDate, setModalDate] = useState(todayISO());
