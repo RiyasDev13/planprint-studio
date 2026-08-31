@@ -11,6 +11,9 @@ import { downloadPDF, downloadPNG, printSheet, slugify } from "@/lib/planprint/e
 import { todayISO } from "@/lib/planprint/calendar";
 
 export const Route = createFileRoute("/editor")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    template: typeof search["template"] === "string" ? search["template"] : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Calendar Editor — PlanPrint" },
