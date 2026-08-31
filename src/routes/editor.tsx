@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Header } from "@/components/planprint/Header";
 import { Footer } from "@/components/planprint/Footer";
 import { CalendarPreview } from "@/components/planprint/CalendarPreview";
